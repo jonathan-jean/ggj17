@@ -15,23 +15,6 @@ PhysicsEngine::~PhysicsEngine() {
 	delete(this->world);
 }
 
-b2Body*                 PhysicsEngine::createPolygon(b2Vec2* points, int count, bool dyn)
-{
-	b2BodyDef           def;
-	b2Body              *body;
-	b2PolygonShape      shape;
-	b2FixtureDef        fix;
-
-	def.position.Set(points[0].x, points[0].y);
-	if (dyn)
-		def.type = b2_dynamicBody;
-	body = this->world->CreateBody(&def);
-	shape.Set(points, count);
-	fix.shape = &shape;
-	fix.density = 1.0;
-	body->CreateFixture(&fix);
-	return body;
-}
 
 b2Body*                 PhysicsEngine::createRectangle(int x, int y, int w, int h, double deg, bool dyn)
 {
@@ -51,6 +34,7 @@ b2Body*                 PhysicsEngine::createRectangle(int x, int y, int w, int 
 	body->CreateFixture(&fix);
 	return body;
 }
+
 
 
 void                                PhysicsEngine::Step()
