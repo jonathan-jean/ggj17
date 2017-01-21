@@ -19,8 +19,8 @@ public:
 	~PhysicsEngine();
 
 public:
-	b2Body*             createRectangle(int, int, int, int, bool = true);
-	static std::vector  getVertices(b2Body *);
+	b2Body*                     createRectangle(int, int, int, int, bool = true);
+	static std::vector<b2Vec2>  getVertices(b2Body *);
 
 };
 

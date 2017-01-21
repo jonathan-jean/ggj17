@@ -31,9 +31,9 @@ b2Body*                 PhysicsEngine::createRectangle(int x, int y, int w, int 
 	return body;
 }
 
-std::vector                 PhysicsEngine::getVertices(b2Body* body)
+std::vector<b2Vec2>                 PhysicsEngine::getVertices(b2Body* body)
 {
-	std::vector             vector;
+	std::vector<b2Vec2>        vector;
 
 	for (int i = 0; i <4 ; i++)
 		vector.push_back(((b2PolygonShape*)body->GetFixtureList()->GetShape())->GetVertex(i));
