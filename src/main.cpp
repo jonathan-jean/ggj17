@@ -10,10 +10,18 @@ int main() {
 	renderTexture.create(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	World world(MAP_PATH, renderTexture);
+
+	sf::Texture bkgTexture;
+	bkgTexture.loadFromFile(BACKGROUND_PATH);
+	sf::Sprite bkg;
+	bkg.setTexture(bkgTexture);
+
 	sf::Sprite globalSprite;
+
+	sf::Vector2f fgBlitPos(0, 0);
+	sf::Vector2f bkgBlitPos(-50, -500);
+
 	// run the program as long as the window is open
-	sf::Vector2f blitPos(0, 0);
-	world._engine.createRectangle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 64, 64, 0);
 	while (window.isOpen())
 	{
 		// check all the window's events that were triggered since the last iteration of the loop
@@ -24,13 +32,25 @@ int main() {
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.key.code == sf::Keyboard::Q)
-				blitPos.x -= 5;
+			{
+				fgBlitPos.x += 5;
+				bkgBlitPos.x += BACKGROUND_SCROLLING;
+			}
 			if (event.key.code == sf::Keyboard::D)
-				blitPos.x += 5;
+			{
+				fgBlitPos.x -= 5;
+				bkgBlitPos.x -= BACKGROUND_SCROLLING;
+			}
 			if (event.key.code == sf::Keyboard::Z)
-				blitPos.y -= 5;
+			{
+				fgBlitPos.y -= 5;
+				bkgBlitPos.y -= BACKGROUND_SCROLLING;
+			}
 			if (event.key.code == sf::Keyboard::S)
-				blitPos.y += 5;
+			{
+				fgBlitPos.y += 5;
+				bkgBlitPos.y += BACKGROUND_SCROLLING;
+			}
 		}
 
 
@@ -40,7 +60,9 @@ int main() {
 		// draw everything here...
 		world.draw();
 		globalSprite.setTexture(world.getRenderTexture().getTexture());
-		globalSprite.setPosition(blitPos);
+		globalSprite.setPosition(fgBlitPos);
+		bkg.setPosition(bkgBlitPos);
+		window.draw(bkg);
 		window.draw(globalSprite);
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
