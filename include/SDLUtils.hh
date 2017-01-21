@@ -64,27 +64,4 @@ void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x = 0, int y = 0){
 	SDL_RenderCopy(ren, tex, NULL, &dst);
 }
 
-int createWindowAndRenderer(const int width, const int height, SDL_Window *window, SDL_Renderer *renderer) {
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-		logSDLError(std::cout, "SDL_Init");
-		return 1;
-	}
-
-	window = SDL_CreateWindow("Lesson 2", 100, 100, width, height, SDL_WINDOW_SHOWN);
-	if (window == nullptr){
-		logSDLError(std::cout, "CreateWindow");
-		SDL_Quit();
-		return 1;
-	}
-
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr){
-		logSDLError(std::cout, "CreateRenderer");
-		cleanup(window);
-		SDL_Quit();
-		return 1;
-	}
-	return 0;
-}
-
 #endif //BASIC_SDLUTILS_HPP
