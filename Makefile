@@ -1,5 +1,6 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = src/main.cpp
+OBJS	=	src/main.cpp\
+		src/PhysicsEngine.cpp
 
 #CC specifies which compiler we're using
 CC = g++
@@ -9,7 +10,7 @@ CC = g++
 COMPILER_FLAGS = -w -g -I include/
 
 #LINKER_FLAGS specifies the libraries we're linking against
-LINKER_FLAGS = -lSDL2
+LINKER_FLAGS = -lSDL2 -lBox2D
 
 #OBJ_NAME specifies the name of our exectuable
 OBJ_NAME = daGame
