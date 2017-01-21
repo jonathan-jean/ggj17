@@ -4,18 +4,18 @@
 
 #include "CollideBox.hh"
 
-CollideBox::CollideBox(const Pos &pos, int width, int height, double rotation) : pos(pos), width(width), height(height),
+CollideBox::CollideBox(const sf::Vector2f &pos, int width, int height, double rotation) : pos(pos), width(width), height(height),
                                                                                  rotation(rotation) {}
 
 CollideBox::~CollideBox() {
 
 }
 
-const Pos &CollideBox::getPos() const {
+const sf::Vector2f &CollideBox::getPos() const {
 	return pos;
 }
 
-void CollideBox::setPos(const Pos &pos) {
+void CollideBox::setPos(const sf::Vector2f &pos) {
 	CollideBox::pos = pos;
 }
 

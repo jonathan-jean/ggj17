@@ -7,22 +7,26 @@
 
 #include <vector>
 #include "Tile.hh"
+#include "PhysicsEngine.hh"
+#include "Parser.hh"
 
 class           World
 {
-	sf::RenderTexture               &_ren;
-	std::vector<std::vector<Tile>>  _map;
-	std::vector<Sprite *>           _sprites;
-	int                             height;
-	int                             width;
+	sf::RenderTexture                   &_ren;
+	std::vector<std::vector<Tile *>>    _map;
+	std::vector<Sprite *>               _sprites;
+	PhysicsEngine                       _engine;
+	Parser                              _parser;
+	int                                 height;
+	int                                 width;
 
   public:
 	World(const std::string &file, sf::RenderTexture &ren);
 	~World();
 
   public:
-	const std::vector<std::vector<Tile>> &map() const;
-	const sf::RenderTexture              &getRenderTexture() const;
+	const std::vector<std::vector<Tile *>> &map() const;
+	const sf::RenderTexture                &getRenderTexture() const;
 
   public:
 	void draw();

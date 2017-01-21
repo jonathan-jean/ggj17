@@ -2,11 +2,21 @@
 // Created by tonell_m on 21/01/17.
 //
 
+#include <PhysicsEngine.hh>
+#include <Parser.hh>
 #include "World.hh"
 
-World::World(const std::string &file, sf::RenderTexture &ren) : _ren(ren)
+World::World(const std::string &file, sf::RenderTexture &ren) : _ren(ren), _engine(0, 9.8), _parser(file, _engine)
 {
-	// TODO : Load textures from file with jj's parser.
+	try
+	{
+		_sprites = _parser.parseSprites();
+		_map = _parser.parseMap();
+	}
+	catch (...)
+	{
+		std::cerr << "Error while parsing !" << std::endl;
+	}
 }
 
 World::~World()
@@ -16,7 +26,7 @@ World::~World()
 
 
 
-const std::vector<std::vector<Tile>>& World::map() const
+const std::vector<std::vector<Tile *>>& World::map() const
 {
 	return _map;
 }
@@ -28,13 +38,18 @@ sf::RenderTexture const &World::getRenderTexture() const
 
 void                            World::draw()
 {
-	std::vector<std::vector<Tile> >::iterator iterator;
+	std::vector<std::vector<Tile *> >::iterator iterator;
 	for (iterator = _map.begin(); iterator != _map.end(); ++iterator)
 	{
-		std::vector<Tile>::iterator lineIterator;
+		std::vector<Tile *>::iterator lineIterator;
 		for (lineIterator = iterator->begin(); lineIterator != iterator->end(); ++lineIterator)
 		{
-			_ren.draw(*lineIterator->getSprite()->getSprite());
+			if ((*lineIterator)->getSprite())
+			{
+				sf::Sprite sprite = *(*lineIterator)->getSprite()->getSprite();
+				sprite.setPosition((*lineIterator)->getPos());
+				_ren.draw(sprite);
+			}
 		}
 	}
 }

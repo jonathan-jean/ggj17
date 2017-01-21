@@ -38,10 +38,10 @@ std::vector<Sprite *> Parser::parseSprites() {
 	int                     width, height, i, j;
 	rapidxml::xml_node<>    *tileset_node = root_node->first_node("tileset");
 	rapidxml::xml_node<>    *image_node = tileset_node->first_node("image");
-	sf::Texture             tileset;
+	sf::Texture             *tileset = new sf::Texture();
 	sf::Sprite              *newSprite;
 
-	if (!tileset.loadFromFile(image_node->first_attribute("source")->value()))
+	if (!tileset->loadFromFile(image_node->first_attribute("source")->value()))
 		throw(std::runtime_error("Error: cannot load " + std::string(image_node->first_attribute("source")->value())));
 	width = (atoi(image_node->first_attribute("width")->value()) / atoi(tileset_node->first_attribute("tilewidth")->value()));
 	height = (atoi(image_node->first_attribute("height")->value()) / atoi(tileset_node->first_attribute("tileheight")->value()));
@@ -54,8 +54,9 @@ std::vector<Sprite *> Parser::parseSprites() {
 		while (j < width)
 		{
 			newSprite = new sf::Sprite();
-			newSprite->setTexture(tileset);
-			newSprite->setTextureRect(sf::IntRect(i * TILE_WIDTH, j * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+			newSprite->setTexture(*tileset);
+			newSprite->setTextureRect(sf::IntRect(j * TILE_WIDTH, i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+			newSprite->setScale(1.f, -1.f);
 			sprites.push_back(new Sprite(newSprite));
 			j++;
 		}
@@ -68,7 +69,7 @@ std::vector<Sprite *> Parser::parseSprites() {
 		id += 1;
 		rapidxml::xml_node<> *obj = tile_node->first_node("objectgroup")->first_node("object");
 		sprites[id]->addCollider(new CollideBox(
-				Pos(atoi(obj->first_attribute("x")->value()), atoi(obj->first_attribute("y")->value())),
+				sf::Vector2f(atoi(obj->first_attribute("x")->value()), atoi(obj->first_attribute("y")->value())),
                 atoi(obj->first_attribute("width")->value()),
                 atoi(obj->first_attribute("height")->value()),
 				obj->first_attribute("rotation") ? atoi(obj->first_attribute("rotation")->value()) : 0
@@ -108,7 +109,8 @@ std::vector<std::vector<Tile *>>    Parser::parseMap()
 		{
 			int id = atoi(data[i * width + j].c_str());
 			tmpSprite = sprites[id];
-			tiles[i].push_back(new Tile(Pos(j * TILE_WIDTH, i * TILE_HEIGHT), tmpSprite));
+			Tile *tile = new Tile(sf::Vector2f(j * TILE_WIDTH, (height - i) * TILE_HEIGHT), tmpSprite);
+			tiles[i].push_back(tile);
 			if (id)
 			{
 				for (std::vector<CollideBox *>::const_iterator it = tmpSprite->getColliders().begin();

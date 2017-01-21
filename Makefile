@@ -3,7 +3,9 @@ OBJS	=	src/main.cpp\
 		src/World.cpp\
 		src/Tile.cpp\
 		src/Sprite.cpp\
-		src/Parser.cpp
+		src/Parser.cpp\
+		src/PhysicsEngine.cpp\
+		src/CollideBox.cpp
 
 #CC specifies which compiler we're using
 CC = g++

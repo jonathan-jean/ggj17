@@ -6,17 +6,18 @@
 #define GGJ17_COLLIDEBOX_HH
 
 
+#include <SFML/System/Vector2.hpp>
 #include "Pos.hh"
 
 class CollideBox {
 public:
-	CollideBox(const Pos &pos, int width, int height, double rotation);
+	CollideBox(const sf::Vector2f &pos, int width, int height, double rotation);
 
 	~CollideBox();
 
-	const Pos &getPos() const;
+	const sf::Vector2f &getPos() const;
 
-	void setPos(const Pos &pos);
+	void setPos(const sf::Vector2f &pos);
 
 	int getWidth() const;
 
@@ -31,10 +32,10 @@ public:
 	void setRotation(double rotation);
 
 private:
-	Pos         pos;
-	int         width;
-	int         height;
-	double      rotation;
+	sf::Vector2f    pos;
+	int             width;
+	int             height;
+	double          rotation;
 };
 
 
