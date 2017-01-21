@@ -5,22 +5,25 @@
 #ifndef GGJ17_PHYSICSENGINE_HH
 #define GGJ17_PHYSICSENGINE_HH
 
+static const float SCALE = 30.f;
+
 #include <Box2D/Box2D.h>
 #include <vector>
 
 class PhysicsEngine {
 
-private:
-	b2World             *world;
-	float               refreshFrequency;
+public:
+	b2World            *world;
+	float              refreshFrequency;
 
 public:
 	PhysicsEngine(float, float);
 	~PhysicsEngine();
 
 public:
-	b2Body*                     createRectangle(int, int, int, int, bool = true);
-	static std::vector<b2Vec2>  getVertices(b2Body *);
+	b2Body*                     createPolygon(b2Vec2*, int, bool = true);
+	b2Body*                     createRectangle(int, int, int, int, double, bool = true);
+	void                        Step();
 
 };
 

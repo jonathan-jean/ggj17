@@ -9,4 +9,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+const int TILE_WIDTH = 128;
+const int TILE_HEIGHT = 128;
+
 #endif //BASIC_CONSTANTS_HPP

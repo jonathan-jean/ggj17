@@ -30,17 +30,12 @@ sf::Sprite          *Sprite::getSprite() const
 	return _sprite;
 }
 
-const std::vector<b2Body>& Sprite::getColliders() const
+const std::vector<CollideBox *> &Sprite::getColliders() const
 {
 	return _colliders;
 }
 
-void                Sprite::setColliders(std::vector<b2Body> &colliders)
-{
-	_colliders = colliders;
-}
-
-void                Sprite::addCollider(b2Body collider)
+void                Sprite::addCollider(CollideBox *collider)
 {
 	_colliders.push_back(collider);
 }
