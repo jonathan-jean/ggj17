@@ -84,6 +84,8 @@ std::vector<std::vector<Tile *>>    Parser::parseMap()
 	rapidxml::xml_node<>    *data_node = root_node->first_node("data");
 	int                     width = atoi(layer_node->first_attribute("width")->value());
 	int                     height = atoi(layer_node->first_attribute("height")->value());
+	const char              *data = data_node->value();
+
 
 
 }
