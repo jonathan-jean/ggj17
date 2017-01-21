@@ -4,7 +4,7 @@ project(ggj17)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-        src/PhysicsEngine.cpp src include src/CollideBox.cpp include/CollideBox.hh)
+        src/PhysicsEngine.cpp src include include/World.hh src/World.cpp)
 
 include_directories(include)
 

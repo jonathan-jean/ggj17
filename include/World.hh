@@ -13,16 +13,19 @@ class           World
 	sf::RenderTexture               &_ren;
 	std::vector<std::vector<Tile>>  _map;
 	std::vector<Sprite *>           _sprites;
+	int                             height;
+	int                             width;
 
   public:
 	World(const std::string &file, sf::RenderTexture &ren);
 	~World();
 
   public:
-	std::vector<std::vector<Tile>>  &map();
+	const std::vector<std::vector<Tile>> &map() const;
+	const sf::RenderTexture              &getRenderTexture() const;
 
   public:
-	static void draw();
+	void draw();
 
 };
 

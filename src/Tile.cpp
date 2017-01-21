@@ -4,7 +4,7 @@
 
 #include "Tile.hh"
 
-Tile::Tile(Pos const pos, Sprite *sprite) : _pos(pos), _sprite(sprite)
+Tile::Tile(sf::Vector2f const pos, Sprite *sprite) : _pos(pos), _sprite(sprite)
 {
 
 }
@@ -31,12 +31,12 @@ Tile&           Tile::operator=(Tile const &t)
 
 
 
-Pos             Tile::getPos() const
+sf::Vector2f    Tile::getPos() const
 {
 	return _pos;
 }
 
-void            Tile::setPos(Pos const pos)
+void            Tile::setPos(sf::Vector2f const pos)
 {
 	_pos = pos;
 }

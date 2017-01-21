@@ -10,18 +10,18 @@
 
 class           Tile
 {
-	Pos             _pos;
+	sf::Vector2f     _pos;
 	Sprite const    *_sprite;
 
   public:
-	Tile(Pos const pos, Sprite *sprite);
+	Tile(sf::Vector2f const pos, Sprite *sprite);
 	Tile(Tile const &cpy);
 	~Tile();
 	Tile            &operator=(Tile const &t);
 
   public:
-	Pos             getPos() const;
-	void            setPos(Pos const pos);
+	sf::Vector2f     getPos() const;
+	void            setPos(sf::Vector2f const pos);
 	Sprite const    *getSprite() const;
 	void            setSprite(Sprite *);
 };
