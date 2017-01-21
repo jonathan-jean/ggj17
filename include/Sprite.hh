@@ -5,25 +5,27 @@
 #ifndef GGJ17_SPRITE_HH
 #define GGJ17_SPRITE_HH
 
-#include <SDL2/SDL.h>
+#include <SFML/Graphics.hpp>
 #include <vector>
 #include <Box2D/Dynamics/b2Body.h>
 
 class           Sprite
 {
   private:
-	SDL_Texture             *_tex;
+	sf::Sprite              *_sprite;
 	std::vector<b2Body>     _colliders;
 
   public:
-	Sprite(SDL_Texture *tex, std::vector<b2Body> const &colliders);
+	Sprite(sf::Sprite *sprite);
 	Sprite(Sprite const &cpy);
 	~Sprite();
 	Sprite                  &operator=(Sprite const &sp);
 
   public:
-	SDL_Texture             *getTexture() const;
-	const std::vector<b2Body> &getColliders() const;
+	sf::Sprite                  *getSprite() const;
+	const std::vector<b2Body>   &getColliders() const;
+	void                        setColliders(std::vector<b2Body> &colliders);
+	void                        addCollider(b2Body collider);
 };
 
 #endif //GGJ17_SPRITE_HH

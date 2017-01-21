@@ -4,35 +4,43 @@
 
 #include "Sprite.hh"
 
-Sprite::Sprite(SDL_Texture *tex, std::vector<b2Body> const &colliders)
-		: _tex(tex), _colliders(colliders) {}
+Sprite::Sprite(sf::Sprite *sprite) : _sprite(sprite) {}
 
-Sprite::Sprite(Sprite const &cpy)
-		: _tex(cpy._tex), _colliders(cpy._colliders) {}
+Sprite::Sprite(Sprite const &cpy) : _sprite(cpy._sprite), _colliders(cpy._colliders) {}
 
 Sprite::~Sprite()
 {
-	if (_tex)
-		delete _tex;
+	if (_sprite)
+		delete _sprite;
 }
 
 Sprite&             Sprite::operator=(Sprite const &sp)
 {
 	if (this != &sp)
 	{
-		this->_tex = sp._tex;
+		this->_sprite = sp._sprite;
 		this->_colliders = sp._colliders;
 	}
 	return *this;
 }
 
 
-SDL_Texture*        Sprite::getTexture() const
+sf::Sprite          *Sprite::getSprite() const
 {
-	return _tex;
+	return _sprite;
 }
 
 const std::vector<b2Body>& Sprite::getColliders() const
 {
 	return _colliders;
+}
+
+void                Sprite::setColliders(std::vector<b2Body> &colliders)
+{
+	_colliders = colliders;
+}
+
+void                Sprite::addCollider(b2Body collider)
+{
+	_colliders.push_back(collider);
 }

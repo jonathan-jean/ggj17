@@ -1,61 +1,43 @@
-#include "SDL2/SDL.h"
-#include "SDLUtils.hh"
+#include <SFML/Graphics.hpp>
 #include "Constants.hh"
 #include <iostream>
 
 int main() {
 
-	SDL_Window *window;
-	SDL_Renderer *renderer;
-	SDL_Texture *tex;
-	bool quit;
-	SDL_Event event;
+	// create the window
+	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "My window");
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		logSDLError(std::cout, "SDL_Init");
-		return 1;
-	}
-
-	window = SDL_CreateWindow("Lesson 2", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	if (window == nullptr) {
-		logSDLError(std::cout, "CreateWindow");
-		SDL_Quit();
-		return 1;
-	}
-
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr) {
-		logSDLError(std::cout, "CreateRenderer");
-		cleanup(window);
-		SDL_Quit();
-		return 1;
-	}
-
-	if ((tex = loadTexture("resources/bmp/square300.bmp", renderer)) == nullptr)
+	sf::Texture testTexture;
+	if (!testTexture.loadFromFile("resources/bmp/square300.bmp"))
 	{
+		std::cerr << "Something fishy happened" << std::endl;
 		return 1;
 	}
+	testTexture.setSmooth(true);
+	sf::Sprite testSprite;
+	testSprite.setTexture(testTexture);
 
-	// MainLoop
-	while (!quit)
+	// run the program as long as the window is open
+	while (window.isOpen())
 	{
-		SDL_WaitEvent(&event);
-
-		switch (event.key.keysym.sym)
+		// check all the window's events that were triggered since the last iteration of the loop
+		sf::Event event;
+		while (window.pollEvent(event))
 		{
-			case SDLK_ESCAPE:
-				quit = true;
-				break;
+			// "close requested" event: we close the window
+			if (event.type == sf::Event::Closed)
+				window.close();
 		}
 
-		//First clear the renderer
-		SDL_RenderClear(renderer);
-		//Draw the texture
-		renderTexture(tex, renderer);
-		//Update the screen
-		SDL_RenderPresent(renderer);
-	}
+		// clear the window with black color
+		window.clear(sf::Color::Black);
 
-	//Cleanup
-	cleanup(window, renderer, tex);
+		testSprite.rotate(6.28 / 60.f);
+
+		// draw everything here...
+		window.draw(testSprite);
+
+		// end the current frame
+		window.display();
+	}
 }
