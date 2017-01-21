@@ -2,7 +2,7 @@
 // Created by tonell_m on 21/01/17.
 //
 
-#include "Pos.hh"
+#include "../include/Pos.hh"
 
 Pos::Pos(const int x, const int y) : x(x), y(y)
 {

@@ -32,5 +32,6 @@
 *.exe
 *.out
 *.app
+.idea/
 daGame
 cmake-build-debug/

@@ -10,7 +10,7 @@ CC = g++
 COMPILER_FLAGS = -w -g -I include/
 
 #LINKER_FLAGS specifies the libraries we're linking against
-LINKER_FLAGS = -lSDL2 -lBox2D
+LINKER_FLAGS = -lSDL2 -lBox2D -lRapidxml
 
 #OBJ_NAME specifies the name of our exectuable
 OBJ_NAME = daGame
