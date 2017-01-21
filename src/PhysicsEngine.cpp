@@ -39,6 +39,6 @@ b2Body*                 PhysicsEngine::createRectangle(int x, int y, int w, int 
 
 void                                PhysicsEngine::Step()
 {
-	this->world->Step(this->refreshFrequency, 8, 3);
+	this->world->Step(this->refreshFrequency, 5, 5);
 }
 

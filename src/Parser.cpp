@@ -6,7 +6,8 @@
 #include "Parser.hh"
 
 Parser::Parser(const std::string &filename, PhysicsEngine &physics)
-	: file(rapidxml::file<>(filename.c_str())), physicsEngine(physics){
+	: physicsEngine(physics), file(rapidxml::file<>(filename.c_str()))
+{
 	try
 	{
 		rapidxml::xml_document<> doc;
@@ -57,6 +58,7 @@ std::vector<Sprite *> Parser::parseSprites() {
 			newSprite->setTexture(*tileset);
 			newSprite->setTextureRect(sf::IntRect(j * TILE_WIDTH, i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
 			newSprite->setScale(1.f, -1.f);
+			newSprite->setOrigin(TILE_WIDTH / 2, TILE_HEIGHT / 2);
 			sprites.push_back(new Sprite(newSprite));
 			j++;
 		}
@@ -113,10 +115,15 @@ std::vector<std::vector<Tile *>>    Parser::parseMap()
 			tiles[i].push_back(tile);
 			if (id)
 			{
+				int y;
 				for (std::vector<CollideBox *>::const_iterator it = tmpSprite->getColliders().begin();
-				     it != tmpSprite->getColliders().end(); ++it)
-					physicsEngine.createRectangle((*it)->getPos().x, (*it)->getPos().y, (*it)->getWidth(),
-					                              (*it)->getHeight(), false);
+				     it != tmpSprite->getColliders().end(); ++it) {
+					y = i * TILE_HEIGHT + ((*it)->getPos().y + (sin((*it)->getRotation() * 0.0174533) * (*it)->getPos().x));
+					if ((*it)->getRotation())
+						y -= TILE_HEIGHT / 2;
+					physicsEngine.createRectangle(j * TILE_WIDTH + (*it)->getPos().x, y, (*it)->getWidth(),
+					                              (*it)->getHeight(), (*it)->getRotation(), false);
+				}
 			}
 			j++;
 		}

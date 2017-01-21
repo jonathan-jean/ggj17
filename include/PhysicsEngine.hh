@@ -21,7 +21,6 @@ public:
 	~PhysicsEngine();
 
 public:
-	b2Body*                     createPolygon(b2Vec2*, int, bool = true);
 	b2Body*                     createRectangle(int, int, int, int, double, bool = true);
 	void                        Step();
 

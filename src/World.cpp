@@ -6,7 +6,7 @@
 #include <Parser.hh>
 #include "World.hh"
 
-World::World(const std::string &file, sf::RenderTexture &ren) : _ren(ren), _engine(0, 9.8), _parser(file, _engine)
+World::World(const std::string &file, sf::RenderTexture &ren) : _ren(ren), _parser(file, _engine), _engine(0, 0.1)
 {
 	try
 	{
@@ -52,4 +52,8 @@ void                            World::draw()
 			}
 		}
 	}
+}
+
+const std::vector<Sprite *> &World::getSprites() const {
+	return _sprites;
 }
