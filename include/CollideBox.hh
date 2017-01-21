@@ -12,7 +12,7 @@ class CollideBox {
 public:
 	CollideBox(const Pos &pos, int width, int height, double rotation);
 
-	virtual ~CollideBox();
+	~CollideBox();
 
 	const Pos &getPos() const;
 
