@@ -47,10 +47,17 @@ void            Character::move(Direction way) const
 		this->body->SetTransform(pos, this->body->GetAngle());
 		this->body->ApplyLinearImpulse(b2Vec2(-0.05, -0.1), this->body->GetPosition(), true);
 	}
-	else
+	else if (way == RIGHT)
 	{
 		b2Vec2 pos = this->body->GetPosition();
 		pos.x += CHAR_SPEED;
+		this->body->SetTransform(pos, this->body->GetAngle());
+		this->body->ApplyLinearImpulse(b2Vec2(-0.05, -0.1), this->body->GetPosition(), true);
+	}
+	else
+	{
+		b2Vec2 pos = this->body->GetPosition();
+		pos.y -= CHAR_SPEED;
 		this->body->SetTransform(pos, this->body->GetAngle());
 		this->body->ApplyLinearImpulse(b2Vec2(-0.05, -0.1), this->body->GetPosition(), true);
 	}

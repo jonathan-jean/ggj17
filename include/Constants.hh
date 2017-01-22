@@ -31,4 +31,17 @@ const int SPELL_DEFAULT_POWER = 10;
 const int PLAYER_START_X = 0;
 const int PLAYER_START_Y = 0;
 
+typedef enum {
+	STILL,
+	GOLEFT,
+	GORIGHT,
+	GOUP
+} Move;
+
+typedef enum {
+	NONE,
+	ATTRACT,
+	REPULSE
+} Spell_;
+
 #endif //BASIC_CONSTANTS_HPP
