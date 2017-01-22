@@ -12,6 +12,8 @@ World::World(const std::string &file, sf::RenderTexture &ren) : _ren(ren), _pars
 	{
 		_sprites = _parser.parseSprites();
 		_map = _parser.parseMap();
+
+		ren.create(_map.at(0).size() * TILE_WIDTH, _map.size() * TILE_HEIGHT);
 	}
 	catch (...)
 	{

@@ -7,9 +7,9 @@ int main() {
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), WINDOW_NAME);
 
 	sf::RenderTexture renderTexture;
-	renderTexture.create(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	World world(MAP_PATH, renderTexture);
+	std::cout << renderTexture.getSize().x << " / " << renderTexture.getSize().y << std::endl;
 
 	sf::Texture bkgTexture;
 	bkgTexture.loadFromFile(BACKGROUND_PATH);
