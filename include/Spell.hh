@@ -26,7 +26,7 @@ class           Spell
   public:
 	unsigned int getPower() const;
 	void setPower(unsigned int _power);
-	const int getCooldown() const;
+	const int &getCooldown() const;
 	int getCurrentCooldown() const;
 	void setCurrentCooldown(int _currentCooldown);
 
