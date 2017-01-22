@@ -13,7 +13,8 @@
 
 typedef enum {
 	LEFT,
-	RIGHT
+	RIGHT,
+	UP
 } Direction;
 
 class           Character
@@ -21,6 +22,8 @@ class           Character
   private:
 	sf::Vector2f        _pos;
 	std::map<SpriteType, AnimatedSprite> _sprites;
+
+public:
 	b2Body              *body;
 
   public:

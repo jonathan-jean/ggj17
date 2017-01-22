@@ -35,4 +35,6 @@ class           World
 
 };
 
+void    disruptImg(sf::Image &initial, sf::Image &rendered, int time);
+
 #endif //GGJ17_WORLD_HH
