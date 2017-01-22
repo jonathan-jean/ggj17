@@ -8,19 +8,27 @@
 #include <SFML/System.hpp>
 #include "Spell.hh"
 #include "AnimatedSprite.hh"
+#include "PhysicsEngine.hh"
+#include <Box2D/Box2D.h>
+
+typedef enum {
+	LEFT,
+	RIGHT
+} Direction;
 
 class           Character
 {
   private:
 	sf::Vector2f        _pos;
 	std::map<SpriteType, AnimatedSprite> _sprites;
+	b2Body              *body;
 
   public:
 	Spell               *push;
 	Spell               *pull;
 
   public:
-	Character();
+	Character(int, int, PhysicsEngine*);
 	~Character();
 
   public:
@@ -29,6 +37,7 @@ class           Character
 
   public:
 	sf::Sprite *animate(SpriteType anim, bool update = false);
+	void            move(Direction) const;
 };
 
 #endif //GGJ17_CHARACTER_HH
