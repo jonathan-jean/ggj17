@@ -115,13 +115,13 @@ std::vector<std::vector<Tile *>>    Parser::parseMap()
 			tiles[i].push_back(tile);
 			if (id)
 			{
+				int x;
 				int y;
 				for (std::vector<CollideBox *>::const_iterator it = tmpSprite->getColliders().begin();
 				     it != tmpSprite->getColliders().end(); ++it) {
-					y = i * TILE_HEIGHT + ((*it)->getPos().y + (sin((*it)->getRotation() * 0.0174533) * (*it)->getPos().x));
-					if ((*it)->getRotation())
-						y -= TILE_HEIGHT / 2;
-					physicsEngine.createRectangle(j * TILE_WIDTH + (*it)->getPos().x, y, (*it)->getWidth(),
+					x = j * TILE_WIDTH + (*it)->getPos().x;
+					y = i * TILE_HEIGHT + (*it)->getPos().y;
+					physicsEngine.createRectangle(x, y, (*it)->getWidth(),
 					                              (*it)->getHeight(), (*it)->getRotation(), false);
 				}
 			}
