@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Constants.hh"
 #include "World.hh"
-
+#include "Character.hh"
 int main() {
 	// create the window
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), WINDOW_NAME);
@@ -19,7 +19,6 @@ int main() {
 	sf::Sprite globalSprite;
 
 	sf::Vector2f blitOffset(0, 0);
-	sf::Vector2f bkgBlitPos(0, 0);
 	b2Body* player = world.engine.createRectangle(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, 64, 64, 0);
 	// run the program as long as the window is open
 	while (window.isOpen())
@@ -33,22 +32,15 @@ int main() {
 				window.close();
 			if (event.key.code == sf::Keyboard::Q)
 			{
-				b2Vec2 pos = player->GetPosition();
-				pos.x -= CHAR_SPEED;
-				player->SetTransform(pos, player->GetAngle());
-				player->ApplyLinearImpulse(b2Vec2(-0.05, -0.1), player->GetPosition(), true);
-
+				player.move(LEFT);
 				world.scroll(blitOffset, bkgBlitPos, FOREGROUND_SCROLLING);
 			}
 			if (event.key.code == sf::Keyboard::D)
 			{
-				b2Vec2 pos = player->GetPosition();
-				pos.x += CHAR_SPEED;
-				player->SetTransform(pos, player->GetAngle());
-				player->ApplyLinearImpulse(b2Vec2(0.05, -0.1), player->GetPosition(), true);
-
+				player.move(RIGHT);
 				world.scroll(blitOffset, bkgBlitPos, -FOREGROUND_SCROLLING);
 			}
+
 		}
 
 		// clear the window with black color
@@ -85,8 +77,11 @@ int main() {
 				window.draw(sprite);
 			}
 		}
+
 		world.engine.Step();
+
 		// end the current frame
 		window.display();
+
 	}
 }

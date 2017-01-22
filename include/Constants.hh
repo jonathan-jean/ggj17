@@ -9,6 +9,8 @@
 
 const int TILE_WIDTH = 64;
 const int TILE_HEIGHT = 64;
+const int CHARACTER_HEIGHT = 1 * TILE_HEIGHT;
+const int CHARACTER_WIDTH = 1 * TILE_WIDTH;
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 15 * TILE_HEIGHT;

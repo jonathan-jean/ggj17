@@ -7,24 +7,37 @@
 
 #include <SFML/System.hpp>
 #include "Spell.hh"
+#include "AnimatedSprite.hh"
+#include "PhysicsEngine.hh"
+#include <Box2D/Box2D.h>
+
+typedef enum {
+	LEFT,
+	RIGHT
+} Direction;
 
 class           Character
 {
   private:
 	sf::Vector2f        _pos;
+	std::map<SpriteType, AnimatedSprite> _sprites;
+	b2Body              *body;
 
   public:
 	Spell               *push;
 	Spell               *pull;
 
   public:
-	Character();
+	Character(int, int, PhysicsEngine*);
 	~Character();
 
   public:
-	const sf::Vector2f &get_pos() const;
+	const sf::Vector2f &getPos() const;
+	void setPos(const sf::Vector2f &_pos);
 
-	void set_pos(const sf::Vector2f &_pos);
+  public:
+	sf::Sprite *animate(SpriteType anim, bool update = false);
+	void            move(Direction) const;
 };
 
 #endif //GGJ17_CHARACTER_HH

@@ -5,7 +5,9 @@ OBJS	=	src/main.cpp\
 		src/Sprite.cpp\
 		src/Parser.cpp\
 		src/PhysicsEngine.cpp\
-		src/CollideBox.cpp
+		src/CollideBox.cpp\
+		src/Character.cpp\
+		src/AnimatedSprite.cpp
 
 #CC specifies which compiler we're using
 CC = g++

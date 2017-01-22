@@ -12,7 +12,7 @@
 
 class           Sprite
 {
-  private:
+  protected:
 	sf::Sprite                      *_sprite;
 	std::vector<CollideBox *>       _colliders;
 
