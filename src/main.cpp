@@ -40,19 +40,17 @@ int main() {
 				player->SetTransform(pos, player->GetAngle());
 				player->ApplyLinearImpulse(b2Vec2(-0.05, -0.1), player->GetPosition(), true);
 
-
-				bkgBlitPos.x += BACKGROUND_SCROLLING;
-			}
 				world.scroll(blitOffset, bkgBlitPos, FOREGROUND_SCROLLING);
+			}
 			if (event.key.code == sf::Keyboard::D)
-				world.scroll(blitOffset, bkgBlitPos, -FOREGROUND_SCROLLING);
 			{
 				scroll = -5;
 				b2Vec2 pos = player->GetPosition();
 				pos.x += CHAR_SPEED;
 				player->SetTransform(pos, player->GetAngle());
 				player->ApplyLinearImpulse(b2Vec2(0.05, -0.1), player->GetPosition(), true);
-				bkgBlitPos.x -= BACKGROUND_SCROLLING;
+
+				world.scroll(blitOffset, bkgBlitPos, -FOREGROUND_SCROLLING);
 			}
 		}
 
