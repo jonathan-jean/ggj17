@@ -19,7 +19,7 @@ int main() {
 	sf::Sprite globalSprite;
 
 	sf::Vector2f blitOffset(0, 0);
-	sf::Vector2f bkgBlitPos(-50, -500);
+	sf::Vector2f bkgBlitPos(0, 0);
 	b2Body* player = world.engine.createRectangle(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, 64, 64, 0);
 	// run the program as long as the window is open
 	while (window.isOpen())
@@ -69,15 +69,20 @@ int main() {
 			world.engine.createRectangle(MouseX, MouseY, 64, 64, 0);
 		}
 
-		Tile * tile = new Tile(sf::Vector2f(0, 0), world.getSprites()[7]);
+		Tile * tile = new Tile(sf::Vector2f(0, 0), world.getSprites()[1]);
 		for (b2Body* BodyIterator = world.engine.world->GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
 		{
 			if (BodyIterator->GetType() == b2_dynamicBody)
 			{
-				sf::Sprite Sprite = *(tile->getSprite()->getSprite());
-				Sprite.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y + TILE_HEIGHT);
-				Sprite.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
-				window.draw(Sprite);
+				sf::Sprite sprite;
+				if (BodyIterator->GetUserData())
+					sprite = *(static_cast<Sprite *>(BodyIterator->GetUserData())->getSprite());
+				else
+					sprite = *(tile->getSprite()->getSprite());
+
+				sprite.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y + TILE_HEIGHT);
+				sprite.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
+				window.draw(sprite);
 			}
 		}
 		world.engine.Step();

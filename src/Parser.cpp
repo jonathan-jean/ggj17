@@ -91,6 +91,14 @@ std::vector<std::string> Parser::split(const std::string &s, char delim) {
 	return tokens;
 }
 
+bool                                Parser::isDynamic(int id)
+{
+	if (id == 15)
+		return (true);
+	return (false);
+}
+
+
 std::vector<std::vector<Tile *>>    Parser::parseMap()
 {
 	rapidxml::xml_node<>        *layer_node = root_node->first_node("layer");
@@ -112,7 +120,8 @@ std::vector<std::vector<Tile *>>    Parser::parseMap()
 			int id = atoi(data[i * width + j].c_str());
 			tmpSprite = sprites[id];
 			Tile *tile = new Tile(sf::Vector2f(j * TILE_WIDTH, (height - i) * TILE_HEIGHT), tmpSprite);
-			tiles[i].push_back(tile);
+			if (!isDynamic(id))
+				tiles[i].push_back(tile);
 			if (id)
 			{
 				int x;
@@ -121,8 +130,10 @@ std::vector<std::vector<Tile *>>    Parser::parseMap()
 				     it != tmpSprite->getColliders().end(); ++it) {
 					x = j * TILE_WIDTH + (*it)->getPos().x;
 					y = i * TILE_HEIGHT + (*it)->getPos().y;
+					if ((*it)->getRotation())
+						y += (sin((*it)->getRotation()) * 0.0174533) * (*it)->getPos().x;
 					physicsEngine.createRectangle(x, y, (*it)->getWidth(),
-					                              (*it)->getHeight(), (*it)->getRotation(), false);
+					                              (*it)->getHeight(), (*it)->getRotation(), isDynamic(id))->SetUserData(tmpSprite);
 				}
 			}
 			j++;
