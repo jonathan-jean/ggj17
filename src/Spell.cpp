@@ -17,7 +17,7 @@ void Spell::setPower(unsigned int _power)
 	Spell::_power = _power;
 }
 
-const int Spell::getCooldown() const
+const int& Spell::getCooldown() const
 {
 	return _cooldown;
 }

@@ -29,7 +29,7 @@ int main() {
 	Spell_ spell;
 
 	sf::Sprite globalSprite;
-	sf::Vector2f bkgBlitPos(0, 0);
+	sf::Vector2f bkgBlitPos(-400, 0);
 	sf::Vector2f blitOffset(0, 0);
 	Character player(SCREEN_WIDTH / 2 + 800, SCREEN_HEIGHT / 2, &(world.engine));
 	world.scroll(blitOffset, bkgBlitPos, -800);
@@ -100,9 +100,9 @@ int main() {
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			int MouseX = sf::Mouse::getPosition(window).x;
-			int MouseY = sf::Mouse::getPosition(window).y;
-			world.engine.createRectangle(MouseX, MouseY, 64, 64, 0);
+//			int MouseX = sf::Mouse::getPosition(window).x;
+//			int MouseY = sf::Mouse::getPosition(window).y;
+//			world.engine.createRectangle(MouseX, MouseY, 64, 64, 0);
 		}
 
 		Tile * tile = new Tile(sf::Vector2f(0, 0), world.getSprites()[1]);
@@ -114,14 +114,14 @@ int main() {
 				{
 					b2Vec2 posPlayer = player.body->GetPosition();
 					b2Vec2 posObj = BodyIterator->GetPosition();
-					b2Vec2 force((posPlayer.x - posObj.x) / 80, (posPlayer.y - posObj.y) / 80);
+					b2Vec2 force((posPlayer.x - posObj.x) / 20, (posPlayer.y - posObj.y) / 20);
 					BodyIterator->ApplyLinearImpulse(force, BodyIterator->GetPosition(), true);
 				}
 				if (spell == REPULSE)
 				{
 					b2Vec2 posPlayer = player.body->GetPosition();
 					b2Vec2 posObj = BodyIterator->GetPosition();
-					b2Vec2 force((posObj.x - posPlayer.x) / 80, (posObj.y - posPlayer.y) / 80);
+					b2Vec2 force((posObj.x - posPlayer.x) / 20, (posObj.y - posPlayer.y) / 20);
 					BodyIterator->ApplyLinearImpulse(force, BodyIterator->GetPosition(), true);
 				}
 				sf::Sprite sprite;
