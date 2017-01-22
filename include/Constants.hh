@@ -14,6 +14,8 @@ const int SCREEN_HEIGHT = 640;
 const int TILE_WIDTH = 64;
 const int TILE_HEIGHT = 64;
 
+const float CHAR_SPEED = 0.166666;
+
 const std::string WINDOW_NAME = "Global Game Jam 2017";
 
 const std::string MAP_PATH = "resources/map.tmx";
