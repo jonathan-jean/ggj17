@@ -9,7 +9,7 @@ AnimatedSprite::AnimatedSprite(sf::Texture *spriteSheet, int frames, std::vector
 		: Sprite(new sf::Sprite(*spriteSheet, sf::IntRect(0, 0, CHARACTER_WIDTH, CHARACTER_HEIGHT))),
 		  _frames(frames), _currentFrame(0)
 {
-
+	_colliders = colliders;
 }
 
 AnimatedSprite::~AnimatedSprite()
