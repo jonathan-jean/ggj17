@@ -20,8 +20,7 @@ int main() {
 
 	sf::Vector2f blitOffset(0, 0);
 	sf::Vector2f bkgBlitPos(-50, -500);
-	b2Body* player = world.engine.createRectangle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 64, 64, 0);
-	int scroll;
+	b2Body* player = world.engine.createRectangle(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, 64, 64, 0);
 	// run the program as long as the window is open
 	while (window.isOpen())
 	{
@@ -34,7 +33,6 @@ int main() {
 				window.close();
 			if (event.key.code == sf::Keyboard::Q)
 			{
-				scroll = 5;
 				b2Vec2 pos = player->GetPosition();
 				pos.x -= CHAR_SPEED;
 				player->SetTransform(pos, player->GetAngle());
@@ -44,7 +42,6 @@ int main() {
 			}
 			if (event.key.code == sf::Keyboard::D)
 			{
-				scroll = -5;
 				b2Vec2 pos = player->GetPosition();
 				pos.x += CHAR_SPEED;
 				player->SetTransform(pos, player->GetAngle());
