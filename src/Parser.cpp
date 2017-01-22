@@ -58,7 +58,7 @@ std::vector<Sprite *> Parser::parseSprites() {
 			newSprite->setTexture(*tileset);
 			newSprite->setTextureRect(sf::IntRect(j * TILE_WIDTH, i * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
 			newSprite->setScale(1.f, -1.f);
-			newSprite->setOrigin(TILE_WIDTH / 2, TILE_HEIGHT / 2);
+			//newSprite->setOrigin(TILE_WIDTH / 2, TILE_HEIGHT / 2);
 			sprites.push_back(new Sprite(newSprite));
 			j++;
 		}

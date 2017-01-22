@@ -6,7 +6,7 @@
 #include <Parser.hh>
 #include "World.hh"
 
-World::World(const std::string &file, sf::RenderTexture &ren) : _ren(ren), _parser(file, _engine), _engine(0, 0.1)
+World::World(const std::string &file, sf::RenderTexture &ren) : _ren(ren), _parser(file, engine), engine(0, 9.81)
 {
 	try
 	{
@@ -38,6 +38,12 @@ sf::RenderTexture const &World::getRenderTexture() const
 	return _ren;
 }
 
+const std::vector<Sprite *> &World::getSprites() const {
+	return _sprites;
+}
+
+
+
 void                            World::draw()
 {
 	std::vector<std::vector<Tile *> >::iterator iterator;
@@ -56,6 +62,14 @@ void                            World::draw()
 	}
 }
 
-const std::vector<Sprite *> &World::getSprites() const {
-	return _sprites;
+void                            World::scroll(sf::Vector2f &blitOffset, int value)
+{
+	blitOffset.x += value;
+
+	for (b2Body* BodyIterator = engine.world->GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
+	{
+		b2Vec2 pos = BodyIterator->GetPosition();
+		pos.x += (static_cast<float>(value) / SCALE);
+		BodyIterator->SetTransform(pos, BodyIterator->GetAngle());
+	}
 }

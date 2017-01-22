@@ -20,18 +20,18 @@ class           World
 	int                                 width;
 
   public:
-	PhysicsEngine                       _engine;
+	PhysicsEngine                       engine;
 	World(const std::string &file, sf::RenderTexture &ren);
 	~World();
 
   public:
 	const std::vector<std::vector<Tile *>> &map() const;
 	const sf::RenderTexture                &getRenderTexture() const;
+	const std::vector<Sprite *> &getSprites() const;
 
   public:
 	void draw();
-
-	const std::vector<Sprite *> &getSprites() const;
+	void scroll(sf::Vector2f &, int);
 
 };
 
