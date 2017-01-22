@@ -31,7 +31,7 @@ class           World
 
   public:
 	void draw();
-	void scroll(sf::Vector2f &, int);
+	void scroll(sf::Vector2f &, sf::Vector2f &, int);
 
 };
 

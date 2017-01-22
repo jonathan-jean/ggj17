@@ -8,18 +8,19 @@
 #include <string>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 720;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 640;
 
 const int TILE_WIDTH = 64;
 const int TILE_HEIGHT = 64;
 
 const std::string WINDOW_NAME = "Global Game Jam 2017";
 
-const std::string MAP_PATH = "resources/test_map.tmx";
+const std::string MAP_PATH = "resources/map.tmx";
 
 const std::string BACKGROUND_PATH = "resources/background0.png";
-const int BACKGROUND_SCROLLING = 1;
+const double BACKGROUND_SCROLLING = 0.5f;
+const int FOREGROUND_SCROLLING = 3;
 
 
 const int SPELL_COOLDOWN = 60;

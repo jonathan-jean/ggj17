@@ -4,13 +4,12 @@
 
 int main() {
 	// create the window
-	sf::RenderWindow window(sf::VideoMode(20 * TILE_WIDTH, 10 * TILE_HEIGHT), WINDOW_NAME);
+	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), WINDOW_NAME);
 	window.setFramerateLimit(60);
 
 	sf::RenderTexture renderTexture;
 
 	World world(MAP_PATH, renderTexture);
-	std::cout << renderTexture.getSize().x << " / " << renderTexture.getSize().y << std::endl;
 
 	sf::Texture bkgTexture;
 	bkgTexture.loadFromFile(BACKGROUND_PATH);
@@ -22,12 +21,8 @@ int main() {
 	sf::Vector2f blitOffset(0, 0);
 	sf::Vector2f bkgBlitPos(-50, -500);
 
-	int scroll;
-	// run the program as long as the window is open
 	while (window.isOpen())
 	{
-		scroll = 0;
-
 		// check all the window's events that were triggered since the last iteration of the loop
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -36,18 +31,11 @@ int main() {
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.key.code == sf::Keyboard::Q)
-			{
-				scroll = 5;
-				bkgBlitPos.x += BACKGROUND_SCROLLING;
-			}
+				world.scroll(blitOffset, bkgBlitPos, FOREGROUND_SCROLLING);
 			if (event.key.code == sf::Keyboard::D)
-			{
-				scroll = -5;
-				bkgBlitPos.x -= BACKGROUND_SCROLLING;
-			}
+				world.scroll(blitOffset, bkgBlitPos, -FOREGROUND_SCROLLING);
 		}
 
-		world.scroll(blitOffset, scroll);
 		// clear the window with black color
 		window.clear(sf::Color::Black);
 
@@ -72,10 +60,8 @@ int main() {
 			if (BodyIterator->GetType() == b2_dynamicBody)
 			{
 				sf::Sprite Sprite = *(tile->getSprite()->getSprite());
-				//Sprite.setOrigin(16.f, 16.f);
 				Sprite.setPosition(SCALE * BodyIterator->GetPosition().x, SCALE * BodyIterator->GetPosition().y + TILE_HEIGHT);
 				Sprite.setRotation(BodyIterator->GetAngle() * 180/b2_pi);
-				//Sprite.setOrigin(TILE_WIDTH / 2, TILE_HEIGHT / 2);
 				window.draw(Sprite);
 			}
 		}
