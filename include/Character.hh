@@ -7,11 +7,13 @@
 
 #include <SFML/System.hpp>
 #include "Spell.hh"
+#include "AnimatedSprite.hh"
 
 class           Character
 {
   private:
 	sf::Vector2f        _pos;
+	std::map<SpriteType, AnimatedSprite> _sprites;
 
   public:
 	Spell               *push;
@@ -22,9 +24,11 @@ class           Character
 	~Character();
 
   public:
-	const sf::Vector2f &get_pos() const;
+	const sf::Vector2f &getPos() const;
+	void setPos(const sf::Vector2f &_pos);
 
-	void set_pos(const sf::Vector2f &_pos);
+  public:
+	sf::Sprite *animate(SpriteType anim, bool update = false);
 };
 
 #endif //GGJ17_CHARACTER_HH

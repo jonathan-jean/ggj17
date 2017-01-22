@@ -13,6 +13,8 @@ const int SCREEN_HEIGHT = 640;
 
 const int TILE_WIDTH = 64;
 const int TILE_HEIGHT = 64;
+const int CHARACTER_HEIGHT = 1 * TILE_HEIGHT;
+const int CHARACTER_WIDTH = 1 * TILE_WIDTH;
 
 const float CHAR_SPEED = 0.166666;
 
