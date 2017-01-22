@@ -24,12 +24,15 @@ int main() {
 	int sinuzoide = 0;
 	//---------BEDEL
 
+	Move move;
+
+	Spell_ spell;
+
 	sf::Sprite globalSprite;
 	sf::Vector2f bkgBlitPos(0, 0);
 	sf::Vector2f blitOffset(0, 0);
-	Character player(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, &(world.engine));
-	Move move = STILL;
-	Spell_ spell = NONE;
+	Character player(SCREEN_WIDTH / 2 + 800, SCREEN_HEIGHT / 2, &(world.engine));
+	world.scroll(blitOffset, bkgBlitPos, -800);
 	while (window.isOpen())
 	{
 		sf::Event event;

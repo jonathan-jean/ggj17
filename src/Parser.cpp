@@ -131,7 +131,7 @@ std::vector<std::vector<Tile *>>    Parser::parseMap()
 					x = j * TILE_WIDTH + (*it)->getPos().x;
 					y = i * TILE_HEIGHT + (*it)->getPos().y;
 					if ((*it)->getRotation())
-						y += (sin((*it)->getRotation()) * 0.0174533) * (*it)->getPos().x;
+						y += (sin((*it)->getRotation()) * 0.0174533) * (*it)->getPos().x / 2;
 					physicsEngine.createRectangle(x, y, (*it)->getWidth(),
 					                              (*it)->getHeight(), (*it)->getRotation(), isDynamic(id))->SetUserData(tmpSprite);
 				}
