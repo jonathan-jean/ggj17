@@ -18,16 +18,14 @@ int main() {
 
 	sf::Sprite globalSprite;
 
+	sf::Vector2f bkgBlitPos(0, 0);
 	sf::Vector2f blitOffset(0, 0);
-	b2Body* player = world.engine.createRectangle(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, 64, 64, 0);
-	// run the program as long as the window is open
+	Character player(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 2, &(world.engine));
 	while (window.isOpen())
 	{
-		// check all the window's events that were triggered since the last iteration of the loop
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// "close requested" event: we close the window
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.key.code == sf::Keyboard::Q)
@@ -40,13 +38,10 @@ int main() {
 				player.move(RIGHT);
 				world.scroll(blitOffset, bkgBlitPos, -FOREGROUND_SCROLLING);
 			}
-
 		}
 
-		// clear the window with black color
 		window.clear(sf::Color::Black);
 
-		// draw everything here...
 		world.draw();
 		globalSprite.setTexture(world.getRenderTexture().getTexture());
 		globalSprite.setPosition(blitOffset);
