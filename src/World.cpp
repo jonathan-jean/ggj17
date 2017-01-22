@@ -65,7 +65,10 @@ void                            World::draw()
 void                            World::scroll(sf::Vector2f &blitOffset, sf::Vector2f &bkgBlitPos, int value)
 {
 	blitOffset.x += value;
-	bkgBlitPos.x += BACKGROUND_SCROLLING;
+	if (value > 0)
+		bkgBlitPos.x += BACKGROUND_SCROLLING;
+	else
+		bkgBlitPos.x -= BACKGROUND_SCROLLING;
 	for (b2Body* BodyIterator = engine.world->GetBodyList(); BodyIterator != 0; BodyIterator = BodyIterator->GetNext())
 	{
 		b2Vec2 pos = BodyIterator->GetPosition();
